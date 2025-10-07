@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Contatore e Colori</title>
+  <script>
+    // JS nel <head> (evento DOMContentLoaded)
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("Pagina caricata");
+    });
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1 id="titolo">Contatore e Colori</h1>
+
+  <!-- 1. Contatore -->
+  <p id="contatore">0</p>
+  <button onclick="incrementa()">Incrementa</button> <!-- inline JS -->
+  <button onclick="azzera()">Azzera</button>         <!-- inline JS -->
+
+  <!-- 2. Cambia Colore -->
+  <div id="boxColori">
+    <button id="rosso">Rosso</button>
+    <button id="verde">Verde</button>
+    <button id="blu">Blu</button>
+  </div>
+
+  <!-- 3. Hover -->
+  <p id="hoverTesto">Passa qui il mouse!</p>
+
+  <!-- 4. Input -->
+  <input type="text" id="inputNome" placeholder="Scrivi il tuo nome...">
+  <p id="saluto"></p>
+
+  <!-- 5. Checkbox -->
+  <label><input type="checkbox" id="toggleTema"> Tema scuro</label>
+
+  <!-- 6. Form -->
+  <form id="formFeedback">
+    <input type="text" name="feedback" placeholder="Lascia un feedback">
+    <button type="submit">Invia</button>
+  </form>
+
+  <!-- JS esterno -->
+  <script src="script.js"></script>
+</body>
+</html>
