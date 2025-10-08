@@ -2,186 +2,230 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Esercizio DOM & Eventi — con elenco visibile</title>
+  <title>Progetto DOM & Eventi - Versione finale</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 30px;
-      background-color: #f9f9f9;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f4f8;
       color: #333;
+      margin: 0;
+      padding: 0;
     }
-    header, main, footer {
-      margin-bottom: 30px;
+
+    header {
+      background-color: #0078d7;
+      color: white;
+      text-align: center;
+      padding: 20px;
     }
+
     h1 {
-      color: #005a9c;
       cursor: pointer;
+      transition: color 0.3s;
     }
-    #lista-dom, #lista-eventi {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 5px;
-      max-width: 600px;
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
+
+    section {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+
+    ul {
+      list-style: square;
+      padding-left: 25px;
+    }
+
     #box {
       width: 200px;
-      height: 80px;
+      height: 100px;
       background-color: lightgray;
-      margin: 20px 0;
+      margin: 20px auto;
       text-align: center;
-      line-height: 80px;
-      border-radius: 8px;
+      line-height: 100px;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: all 0.3s;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s;
     }
-    button, select, input {
-      margin: 10px 0;
-      padding: 8px;
+
+    select, input, button {
+      display: block;
+      margin: 10px auto;
+      padding: 8px 12px;
       font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
-    .highlight {
-      background-color: #ffffcc;
+
+    button {
+      background-color: #0078d7;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #222;
+      color: #ddd;
+      padding: 10px;
+    }
+
+    .evidenziato {
+      background-color: #fff4b2;
     }
   </style>
 
   <script>
-    // Funzione 1: cambia il testo del titolo
+    // EVENTO 1 - onclick (titolo)
     function cambiaTitolo() {
-      document.getElementById("titolo").innerText = "Titolo cliccato!";
+      const titolo = document.getElementById("titolo");
+      titolo.innerText = "Hai cliccato sul titolo!";
+      titolo.style.color = "#ffcc00";
     }
 
-    // Funzione 2: modifica lo sfondo del body quando scelgo dal select
+    // EVENTO 2 - onload (pagina)
+    window.onload = function() {
+      document.getElementById("data").innerText = "Oggi è " + new Date().toLocaleString();
+    };
+
+    // EVENTO 3 - onchange (select)
     function cambiaTema() {
       const tema = document.getElementById("tema").value;
+      const corpo = document.body;
+
       if (tema === "chiaro") {
-        document.body.style.backgroundColor = "#ffffff";
-        document.body.style.color = "#333333";
+        corpo.style.backgroundColor = "#f0f4f8";
+        corpo.style.color = "#333";
       } else if (tema === "scuro") {
-        document.body.style.backgroundColor = "#222222";
-        document.body.style.color = "#eeeeee";
+        corpo.style.backgroundColor = "#1e1e1e";
+        corpo.style.color = "#eee";
       } else if (tema === "verde") {
-        document.body.style.backgroundColor = "#e0f2e9";
-        document.body.style.color = "#0b3d2e";
-      } else {
-        // valore vuoto o altro
-        document.body.style.backgroundColor = "#f9f9f9";
-        document.body.style.color = "#333333";
+        corpo.style.backgroundColor = "#e6f5e8";
+        corpo.style.color = "#0a3d25";
       }
     }
 
-    // Funzione 3: alert con il nome scritto
-    function saluta() {
-      const nome = document.getElementById("nome").value || "Visitatore";
-      alert("Ciao, " + nome + "!");
+    // EVENTI 4 e 5 - onfocus/onblur
+    function evidenziaInput(el) {
+      el.style.backgroundColor = "#fff2cc";
+    }
+    function rimuoviEvidenzia(el) {
+      el.style.backgroundColor = "white";
     }
 
-    // Funzione 4: gestisce eventi sul box
-    function boxMouseOver() {
-      const b = document.getElementById("box");
-      b.style.backgroundColor = "lightgreen";
-      b.innerText = "Mouse sopra!";
+    // EVENTO 6 - onclick (bottone)
+    function saluta() {
+      const nome = document.getElementById("nome").value || "visitatore";
+      alert("Ciao " + nome + "!");
     }
-    function boxMouseOut() {
-      const b = document.getElementById("box");
-      b.style.backgroundColor = "lightgray";
-      b.innerText = "Passa sopra o cliccami";
+
+    // EVENTI 7, 8, 9 - (div)
+    function boxOver() {
+      const box = document.getElementById("box");
+      box.style.backgroundColor = "#90ee90";
+      box.innerText = "Mouse sopra!";
+    }
+    function boxOut() {
+      const box = document.getElementById("box");
+      box.style.backgroundColor = "lightgray";
+      box.innerText = "Passa sopra o cliccami";
     }
     function boxClick() {
-      const b = document.getElementById("box");
-      b.style.backgroundColor = "salmon";
-      b.innerText = "Box cliccato!";
+      const box = document.getElementById("box");
+      box.style.backgroundColor = "#ffb6b6";
+      box.innerText = "Hai cliccato!";
     }
 
-    // Funzione 5: modifica lo stile del paragrafo quando il mouse passa
-    function evidenziaParagrafo() {
-      document.getElementById("paragrafo").classList.add("highlight");
+    // EVENTO 10 - onmouseover/onmouseout (paragrafo)
+    function evidenziaTesto() {
+      document.getElementById("testo").classList.add("evidenziato");
     }
-    function rimuoviEvidenzia() {
-      document.getElementById("paragrafo").classList.remove("highlight");
+    function togliEvidenzia() {
+      document.getElementById("testo").classList.remove("evidenziato");
     }
-
-    // Al caricamento della pagina, riempio gli elenchi visibili
-    window.onload = function() {
-      // Elenco elementi DOM
-      const elDom = [
-        "body",
-        "h1 (id=titolo)",
-        "select (id=tema)",
-        "input (id=nome)",
-        "button (Saluta)",
-        "div (id=box)",
-        "p (id=paragrafo)",
-        "header",
-        "main",
-        "footer"
-      ];
-      const domList = document.getElementById("lista-dom");
-      domList.innerHTML = elDom.map((e, i) => (i+1) + ". " + e).join("<br>");
-
-      // Elenco eventi
-      const elEventi = [
-        "onload (window)",
-        "onclick (h1)",
-        "onchange (select)",
-        "onfocus (input)",
-        "onblur (input)",
-        "onclick (button)",
-        "onmouseover (div box)",
-        "onmouseout (div box)",
-        "onclick (div box)",
-        "onmouseover (p)",
-        "onmouseout (p)"
-      ];
-      const evList = document.getElementById("lista-eventi");
-      evList.innerHTML = elEventi.map((e, i) => (i+1) + ". " + e).join("<br>");
-    };
   </script>
 </head>
 
 <body>
   <header>
-    <h1 id="titolo" onclick="cambiaTitolo()">Pagina con elenco DOM ed eventi</h1>
+    <h1 id="titolo" onclick="cambiaTitolo()">Progetto DOM ed Eventi</h1>
   </header>
 
   <main>
-    <p id="descrizione">Di seguito vedi gli elenchi degli elementi DOM usati e degli eventi JavaScript gestiti.</p>
+    <section>
+      <h2>Elenco elementi DOM usati</h2>
+      <ul>
+        <li>&lt;body&gt;</li>
+        <li>&lt;h1 id="titolo"&gt;</li>
+        <li>&lt;p id="testo"&gt;</li>
+        <li>&lt;select id="tema"&gt;</li>
+        <li>&lt;input id="nome"&gt;</li>
+        <li>&lt;button&gt;</li>
+        <li>&lt;div id="box"&gt;</li>
+        <li>&lt;header&gt;</li>
+        <li>&lt;main&gt;</li>
+        <li>&lt;footer&gt;</li>
+      </ul>
+    </section>
 
-    <h2>Elenco elementi DOM usati</h2>
-    <div id="lista-dom"></div>
+    <section>
+      <h2>Elenco eventi JavaScript gestiti</h2>
+      <ul>
+        <li>onload (body)</li>
+        <li>onclick (h1)</li>
+        <li>onchange (select)</li>
+        <li>onfocus (input)</li>
+        <li>onblur (input)</li>
+        <li>onclick (button)</li>
+        <li>onmouseover (div)</li>
+        <li>onmouseout (div)</li>
+        <li>onclick (div)</li>
+        <li>onmouseover/onmouseout (paragrafo)</li>
+      </ul>
+    </section>
 
-    <h2>Elenco eventi JavaScript gestiti</h2>
-    <div id="lista-eventi"></div>
+    <section>
+      <p id="testo" onmouseover="evidenziaTesto()" onmouseout="togliEvidenzia()">
+        Passa il mouse sopra questo testo per evidenziarlo.
+      </p>
 
-    <hr>
+      <label for="tema">Scegli un tema:</label>
+      <select id="tema" onchange="cambiaTema()">
+        <option value="">Predefinito</option>
+        <option value="chiaro">Chiaro</option>
+        <option value="scuro">Scuro</option>
+        <option value="verde">Verde</option>
+      </select>
 
-    <p id="paragrafo" onmouseover="evidenziaParagrafo()" onmouseout="rimuoviEvidenzia()">
-      Passa sopra questo paragrafo per evidenziarlo.
-    </p>
+      <input type="text" id="nome" placeholder="Inserisci il tuo nome"
+             onfocus="evidenziaInput(this)" onblur="rimuoviEvidenzia(this)">
 
-    <label for="tema">Tema pagina:</label>
-    <select id="tema" onchange="cambiaTema()">
-      <option value="">(predefinito)</option>
-      <option value="chiaro">Chiaro</option>
-      <option value="scuro">Scuro</option>
-      <option value="verde">Verde</option>
-    </select>
+      <button onclick="saluta()">Saluta</button>
 
-    <input type="text" id="nome" placeholder="Inserisci il tuo nome"
-           onfocus="this.style.border='2px solid blue'" onblur="this.style.border=''">
-
-    <button onclick="saluta()">Saluta</button>
-
-    <div id="box"
-         onmouseover="boxMouseOver()"
-         onmouseout="boxMouseOut()"
-         onclick="boxClick()">
-      Passa sopra o cliccami
-    </div>
+      <div id="box"
+           onmouseover="boxOver()"
+           onmouseout="boxOut()"
+           onclick="boxClick()">
+        Passa sopra o cliccami
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>2025 — Esempio DOM ed eventi</p>
+    <p id="data"></p>
   </footer>
 </body>
 </html>
