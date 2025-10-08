@@ -24,6 +24,6 @@ function boxClick() {
 }
 
 // Evento 10 (aggiunto da JS esterno)
-document.getElementById("btnEsterno").addEventListener("click", function() {
-  alert("Questo messaggio proviene dal file esterno script.js!");
+
 });
+
