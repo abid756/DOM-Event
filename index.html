@@ -14,24 +14,37 @@
     };
 
     // Evento 2 - onclick (titolo)
-    function cambiaTitolo() {
+    function cambiaTitolo() 
+    {
       const t = document.getElementById("titolo");
       t.innerText = "Hai cliccato sul titolo!";
       t.style.color = "#ff9900";
     }
+    // Evento 3 - dbclick (titolo)
+    function ripristinaTitolo()
+    {
+      const t = document.getElementById("titolo");
+      t.innerText = "Progetto DOM ed Eventi";
+      t.style.color = "white"; // o il colore originale che preferisci
+    }
 
-    // Evento 3 - onchange (select)
-    function cambiaSfondo() {
+    
+
+    // Evento 4 - onchange (select)
+    function cambiaSfondo()
+    {
       const colore = document.getElementById("colore").value;
       document.body.style.backgroundColor = colore;
     }
 
-    // Eventi 4 e 5 - focus e blur su input
-    function evidenziaInput(el) {
+    // Eventi 5 e 6 - focus e blur su input
+    function evidenziaInput(el) 
+    {
       el.style.backgroundColor = "#fff3b0";
     }
 
-    function togliEvidenzia(el) {
+    function togliEvidenzia(el) 
+    {
       el.style.backgroundColor = "white";
     }
   </script>
@@ -116,6 +129,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
