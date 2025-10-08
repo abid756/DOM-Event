@@ -2,71 +2,187 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Esercizio DOM, Eventi e CSS</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Esercizio DOM & Eventi — con elenco visibile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header, main, footer {
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: #005a9c;
+      cursor: pointer;
+    }
+    #lista-dom, #lista-eventi {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 5px;
+      max-width: 600px;
+    }
+    #box {
+      width: 200px;
+      height: 80px;
+      background-color: lightgray;
+      margin: 20px 0;
+      text-align: center;
+      line-height: 80px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    button, select, input {
+      margin: 10px 0;
+      padding: 8px;
+      font-size: 16px;
+    }
+    .highlight {
+      background-color: #ffffcc;
+    }
+  </style>
 
-  <!-- JAVASCRIPT INTERNO -->
   <script>
+    // Funzione 1: cambia il testo del titolo
     function cambiaTitolo() {
-      document.getElementById("titolo").innerText = "Hai cliccato sul titolo!";
+      document.getElementById("titolo").innerText = "Titolo cliccato!";
     }
 
-    function cambiaSfondo() {
-      document.body.style.backgroundColor = "lightyellow";
+    // Funzione 2: modifica lo sfondo del body quando scelgo dal select
+    function cambiaTema() {
+      const tema = document.getElementById("tema").value;
+      if (tema === "chiaro") {
+        document.body.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#333333";
+      } else if (tema === "scuro") {
+        document.body.style.backgroundColor = "#222222";
+        document.body.style.color = "#eeeeee";
+      } else if (tema === "verde") {
+        document.body.style.backgroundColor = "#e0f2e9";
+        document.body.style.color = "#0b3d2e";
+      } else {
+        // valore vuoto o altro
+        document.body.style.backgroundColor = "#f9f9f9";
+        document.body.style.color = "#333333";
+      }
     }
 
-    function ripristinaSfondo() {
-      document.body.style.backgroundColor = "white";
+    // Funzione 3: alert con il nome scritto
+    function saluta() {
+      const nome = document.getElementById("nome").value || "Visitatore";
+      alert("Ciao, " + nome + "!");
     }
+
+    // Funzione 4: gestisce eventi sul box
+    function boxMouseOver() {
+      const b = document.getElementById("box");
+      b.style.backgroundColor = "lightgreen";
+      b.innerText = "Mouse sopra!";
+    }
+    function boxMouseOut() {
+      const b = document.getElementById("box");
+      b.style.backgroundColor = "lightgray";
+      b.innerText = "Passa sopra o cliccami";
+    }
+    function boxClick() {
+      const b = document.getElementById("box");
+      b.style.backgroundColor = "salmon";
+      b.innerText = "Box cliccato!";
+    }
+
+    // Funzione 5: modifica lo stile del paragrafo quando il mouse passa
+    function evidenziaParagrafo() {
+      document.getElementById("paragrafo").classList.add("highlight");
+    }
+    function rimuoviEvidenzia() {
+      document.getElementById("paragrafo").classList.remove("highlight");
+    }
+
+    // Al caricamento della pagina, riempio gli elenchi visibili
+    window.onload = function() {
+      // Elenco elementi DOM
+      const elDom = [
+        "body",
+        "h1 (id=titolo)",
+        "select (id=tema)",
+        "input (id=nome)",
+        "button (Saluta)",
+        "div (id=box)",
+        "p (id=paragrafo)",
+        "header",
+        "main",
+        "footer"
+      ];
+      const domList = document.getElementById("lista-dom");
+      domList.innerHTML = elDom.map((e, i) => (i+1) + ". " + e).join("<br>");
+
+      // Elenco eventi
+      const elEventi = [
+        "onload (window)",
+        "onclick (h1)",
+        "onchange (select)",
+        "onfocus (input)",
+        "onblur (input)",
+        "onclick (button)",
+        "onmouseover (div box)",
+        "onmouseout (div box)",
+        "onclick (div box)",
+        "onmouseover (p)",
+        "onmouseout (p)"
+      ];
+      const evList = document.getElementById("lista-eventi");
+      evList.innerHTML = elEventi.map((e, i) => (i+1) + ". " + e).join("<br>");
+    };
   </script>
 </head>
 
-<!-- Evento 1: onload -->
-<body onload="alert('Benvenuto nella mia pagina!')">
-
+<body>
   <header>
-    <!-- Evento 2: onclick -->
-    <h1 id="titolo" onclick="cambiaTitolo()">Pagina di prova con DOM & Eventi</h1>
+    <h1 id="titolo" onclick="cambiaTitolo()">Pagina con elenco DOM ed eventi</h1>
   </header>
 
   <main>
-    <!-- Evento 3: onmouseover, Evento 4: onmouseout -->
-    <img id="foto" src="https://picsum.photos/200" alt="Immagine casuale"
-         onmouseover="this.style.border='5px solid red'"
-         onmouseout="this.style.border='none'">
+    <p id="descrizione">Di seguito vedi gli elenchi degli elementi DOM usati e degli eventi JavaScript gestiti.</p>
 
-    <p id="paragrafo">Passa il mouse sopra l’immagine per vedere l’effetto!</p>
+    <h2>Elenco elementi DOM usati</h2>
+    <div id="lista-dom"></div>
 
-    <!-- Evento 5: onchange -->
-    <label for="colore">Scegli un colore di sfondo:</label>
-    <select id="colore" onchange="cambiaColore()">
-      <option value="">-- Seleziona --</option>
-      <option value="lightblue">Azzurro</option>
-      <option value="lightgreen">Verde chiaro</option>
-      <option value="lightpink">Rosa</option>
+    <h2>Elenco eventi JavaScript gestiti</h2>
+    <div id="lista-eventi"></div>
+
+    <hr>
+
+    <p id="paragrafo" onmouseover="evidenziaParagrafo()" onmouseout="rimuoviEvidenzia()">
+      Passa sopra questo paragrafo per evidenziarlo.
+    </p>
+
+    <label for="tema">Tema pagina:</label>
+    <select id="tema" onchange="cambiaTema()">
+      <option value="">(predefinito)</option>
+      <option value="chiaro">Chiaro</option>
+      <option value="scuro">Scuro</option>
+      <option value="verde">Verde</option>
     </select>
 
-    <!-- Evento 6: onfocus, Evento 7: onblur -->
-    <input type="text" id="nome" placeholder="Scrivi il tuo nome"
-           onfocus="this.style.backgroundColor='lightyellow'"
-           onblur="this.style.backgroundColor='white'">
+    <input type="text" id="nome" placeholder="Inserisci il tuo nome"
+           onfocus="this.style.border='2px solid blue'" onblur="this.style.border=''">
 
-    <!-- Evento 8: onclick (inline) -->
-    <button onclick="alert('Hai premuto il bottone!')">Cliccami</button>
+    <button onclick="saluta()">Saluta</button>
 
-    <!-- Evento 9: mouseover / mouseout gestito da JS esterno -->
-    <div id="box">Passa sopra o clicca su di me!</div>
-
-    <!-- Evento 10: click gestito da JS esterno -->
-    <button id="btnEsterno">Mostra messaggio (file esterno)</button>
+    <div id="box"
+         onmouseover="boxMouseOver()"
+         onmouseout="boxMouseOut()"
+         onclick="boxClick()">
+      Passa sopra o cliccami
+    </div>
   </main>
 
   <footer>
-    <p>Creato da [Il tuo nome] - 2025</p>
+    <p>2025 — Esempio DOM ed eventi</p>
   </footer>
-
-  <!-- FILE JS ESTERNO -->
-  <script src="script.js"></script>
 </body>
 </html>
 
