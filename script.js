@@ -23,12 +23,14 @@ function boxClick() {
   box.innerText = "Hai cliccato!";
 }
 
-// Evento 10 (aggiunto da JS esterno)
+// Evento 10 
+const titolo = document.getElementById("titolo");
 titolo.addEventListener("dblclick", function() {
   titolo.innerText = "Progetto DOM ed Eventi";
   titolo.style.color = "white";
 });
 });
+
 
 
 
