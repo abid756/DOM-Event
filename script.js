@@ -24,12 +24,11 @@ function boxClick() {
 }
 
 // Evento 10 (aggiunto da JS esterno)
-function ripristinaTitolo() {
-  const t = document.getElementById("titolo");
-  t.innerText = "Progetto DOM ed Eventi";
-  t.style.color = "white"; // o il colore originale che preferisci
-}
-
+titolo.addEventListener("dblclick", function() {
+  titolo.innerText = "Progetto DOM ed Eventi";
+  titolo.style.color = "white";
 });
+});
+
 
 
