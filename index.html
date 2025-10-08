@@ -2,33 +2,71 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Esercizio DOM & Eventi</title>
+  <title>Esercizio DOM, Eventi e CSS</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JAVASCRIPT INTERNO -->
   <script>
-    // JS interno
-    function cambiaTesto() {
-      document.getElementById("paragrafo").innerHTML = "Hai cliccato il bottone!";
+    function cambiaTitolo() {
+      document.getElementById("titolo").innerText = "Hai cliccato sul titolo!";
+    }
+
+    function cambiaSfondo() {
+      document.body.style.backgroundColor = "lightyellow";
+    }
+
+    function ripristinaSfondo() {
+      document.body.style.backgroundColor = "white";
     }
   </script>
-  <link rel="stylesheet" href="style.css">
 </head>
-<body onload="paginaCaricata()"> <!-- evento inline -->
 
-  <h1 id="titolo">Benvenuto nella mia pagina</h1>
-  <p id="paragrafo">Questo è un paragrafo.</p>
-  <input type="text" id="campoTesto" placeholder="Scrivi qualcosa">
-  <button onclick="cambiaTesto()">Cambia testo</button> <!-- evento inline -->
+<!-- Evento 1: onload -->
+<body onload="alert('Benvenuto nella mia pagina!')">
 
-  <img id="immagine" src="immagine.jpg" alt="Foto" onmouseover="ingrandisci()" onmouseout="riduci()">
+  <header>
+    <!-- Evento 2: onclick -->
+    <h1 id="titolo" onclick="cambiaTitolo()">Pagina di prova con DOM & Eventi</h1>
+  </header>
 
-  <div id="box" onclick="coloraBox()">Cliccami per cambiare colore</div>
+  <main>
+    <!-- Evento 3: onmouseover, Evento 4: onmouseout -->
+    <img id="foto" src="https://picsum.photos/200" alt="Immagine casuale"
+         onmouseover="this.style.border='5px solid red'"
+         onmouseout="this.style.border='none'">
 
-  <ul id="lista">
-    <li>Elemento 1</li>
-    <li>Elemento 2</li>
-  </ul>
+    <p id="paragrafo">Passa il mouse sopra l’immagine per vedere l’effetto!</p>
 
-  <button id="btnEsterno">Mostra messaggio (JS esterno)</button>
+    <!-- Evento 5: onchange -->
+    <label for="colore">Scegli un colore di sfondo:</label>
+    <select id="colore" onchange="cambiaColore()">
+      <option value="">-- Seleziona --</option>
+      <option value="lightblue">Azzurro</option>
+      <option value="lightgreen">Verde chiaro</option>
+      <option value="lightpink">Rosa</option>
+    </select>
 
-  <script src="script.js"></script> <!-- file JS esterno -->
+    <!-- Evento 6: onfocus, Evento 7: onblur -->
+    <input type="text" id="nome" placeholder="Scrivi il tuo nome"
+           onfocus="this.style.backgroundColor='lightyellow'"
+           onblur="this.style.backgroundColor='white'">
+
+    <!-- Evento 8: onclick (inline) -->
+    <button onclick="alert('Hai premuto il bottone!')">Cliccami</button>
+
+    <!-- Evento 9: mouseover / mouseout gestito da JS esterno -->
+    <div id="box">Passa sopra o clicca su di me!</div>
+
+    <!-- Evento 10: click gestito da JS esterno -->
+    <button id="btnEsterno">Mostra messaggio (file esterno)</button>
+  </main>
+
+  <footer>
+    <p>Creato da [Il tuo nome] - 2025</p>
+  </footer>
+
+  <!-- FILE JS ESTERNO -->
+  <script src="script.js"></script>
 </body>
 </html>
+
