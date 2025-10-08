@@ -1,10 +1,10 @@
-// Evento 6 (inline) viene da HTML -> saluta()
+// Evento 7 (inline) viene da HTML -> saluta()
 function saluta() {
   const nome = document.getElementById("nome").value || "Visitatore";
   alert("Ciao, " + nome + "!");
 }
 
-// Eventi 7, 8, 9 (sul box)
+// Eventi 8, 9, 10 (sul box)
 function boxOver() {
   const box = document.getElementById("box");
   box.style.backgroundColor = "lightgreen";
@@ -23,13 +23,9 @@ function boxClick() {
   box.innerText = "Hai cliccato!";
 }
 
-// Evento 10 
-const titolo = document.getElementById("titolo");
-titolo.addEventListener("dblclick", function() {
-  titolo.innerText = "Progetto DOM ed Eventi";
-  titolo.style.color = "white";
 });
 });
+
 
 
 
